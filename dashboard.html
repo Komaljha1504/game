@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Scramble - Dashboard</title>
+    <link rel="stylesheet" href="mainstyle.css">
+    <link rel="stylesheet" href="authentication.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="avtar.png" alt="Logo" class="sidebar-logo">
+                <h3>Word Scramble</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html" class="active"><i class="fas fa-home"></i> Dashboard</a>
+                <a href="profile.html"><i class="fas fa-user"></i> Profile</a>
+                <a href="login.html" id="logout-btn"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>© 2025 Word Scramble</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="user-welcome">
+                    <h2>Welcome, <span id="user-name">Player</span>!</h2>
+                </div>
+            </header>
+
+            <!-- Game Area -->
+            <div class="game-container">
+                <div class="game-header">
+                    <div class="game-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-star"></i>
+                            <span>Score: <span id="score">0</span></span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-stopwatch"></i>
+                            <span>Time: <span id="timer">60</span>s</span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-check"></i>
+                            <span>Correct: <span id="correct-count">0</span></span>
+                        </div>
+                        <div class="stat-item">
+                            <i class="fas fa-times"></i>
+                            <span>Wrong: <span id="wrong-count">0</span></span>
+                        </div>
+                    </div>
+                    <div class="difficulty-selector">
+                        <label for="difficulty">Difficulty:</label>
+                        <select id="difficulty">
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="game-word-container">
+                    <h3>Unscramble this word:</h3>
+                    <div class="scrambled-word" id="scrambled-word">YALP</div>
+                    <div class="hint-container">
+                        <span id="hint-text" class="hidden">Hint: <span id="hint-value"></span></span>
+                        <button id="hint-btn" class="btn-hint"><i class="fas fa-lightbulb"></i> Get Hint</button>
+                    </div>
+                </div>
+
+                <div class="game-input-container">
+                    <input type="text" id="word-input" placeholder="Type your answer here..." autocomplete="off">
+                    <button id="submit-btn" class="btn-primary">Submit</button>
+                    <button id="next-btn" class="btn-secondary">Next Word</button>
+                </div>
+
+                <div class="game-message" id="game-message"></div>
+
+                <div class="game-controls">
+                    <button id="start-btn" class="btn-primary"><i class="fas fa-play"></i> Start Game</button>
+                    <button id="reset-btn" class="btn-secondary"><i class="fas fa-redo"></i> Reset</button>
+                </div>
+            </div>
+
+            <!-- Leaderboard Section -->
+            <div class="leaderboard-container">
+                <h3><i class="fas fa-trophy"></i> Your Best Scores</h3>
+                <div class="leaderboard">
+                    <div class="leaderboard-item">
+                        <span class="difficulty easy">Easy</span>
+                        <span class="score" id="easy-best">0</span>
+                    </div>
+                    <div class="leaderboard-item">
+                        <span class="difficulty medium">Medium</span>
+                        <span class="score" id="medium-best">0</span>
+                    </div>
+                    <div class="leaderboard-item">
+                        <span class="difficulty hard">Hard</span>
+                        <span class="score" id="hard-best">0</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Game Settings</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="settings-group">
+                    <label for="time-limit">Time Limit (seconds):</label>
+                    <input type="range" id="time-limit" min="30" max="120" step="10" value="60">
+                    <span id="time-value">60</span>
+                </div>
+                <div class="settings-group">
+                    <label for="sound-toggle">Sound Effects:</label>
+                    <label class="switch">
+                        <input type="checkbox" id="sound-toggle" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="settings-group">
+                    <label for="theme-select">Theme:</label>
+                    <select id="theme-select">
+                        <option value="default">Default</option>
+                        <option value="dark">Dark Mode</option>
+                        <option value="neon">Neon</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save-settings" class="btn-primary">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <audio id="success-sound" src="success.mp3"></audio>
+    <audio id="error-sound" src="error.mp3"></audio>
+
+    <script src="authentication.js"></script>
+    <script src="dashboard.js"></script>
+</body>-
+</html>

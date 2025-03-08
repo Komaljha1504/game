@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Scramble - Profile</title>
+    <link rel="stylesheet" href="mainstyles.css">
+    <link rel="stylesheet" href="authentication.css">
+    <style>
+        /* Fix scrolling issue */
+        html, body {
+            height: 100%;
+            overflow-y: auto;
+        }
+        
+        .app-container {
+            max-height: 100vh;
+            overflow-y: auto;
+        }
+        
+        .main-content {
+            overflow-y: auto;
+            padding-bottom: 2rem;
+        }
+        
+        /* Fix for logo size */
+        .sidebar-logo {
+            max-width: 80px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <img src="avtar.png" alt="Logo" class="sidebar-logo">
+                <h3>Word Scramble</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="dashboard.html"><i class="fas fa-home"></i> Dashboard</a>
+            </nav>
+            <div class="sidebar-footer">
+                <p>© 2025 Word Scramble</p>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-bar">
+                <div class="user-welcome">
+                    <h2>Your Profile</h2>
+                </div>
+            </header>
+
+            <div class="profile-container">
+                <div class="profile-header">
+                    <div class="profile-image">
+                        <!-- User profile image will go here -->
+                    </div>
+                    <div class="profile-info">
+                        <h3 id="display-name">User Name</h3>
+                        <p id="display-email">user@example.com</p>
+                    </div>
+                </div>
+                <div class="profile-stats">
+                    <div class="stat-box">
+                        <span class="stat-value" id="games-played">0</span>
+                        <span class="stat-label">Games Played</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-value" id="total-words">0</span>
+                        <span class="stat-label">Words Solved</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-value" id="highest-score">0</span>
+                        <span class="stat-label">Highest Score</span>
+                    </div>
+                </div>
+
+                <div class="profile-form-container">
+                    <h3>Personal Information</h3>
+                    <form id="profile-form">
+                        <div class="form-group">
+                            <label for="profile-name">Full Name</label>
+                            <input type="text" id="profile-name" name="name">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-email">Email</label>
+                            <input type="email" id="profile-email" name="email">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-dob">Date of Birth</label>
+                            <input type="date" id="profile-dob" name="dob">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-phone">Phone Number</label>
+                            <input type="tel" id="profile-phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="profile-state">State</label>
+                            <input type="text" id="profile-state" name="state">
+                        </div>
+                        
+                        <h3>Change Password</h3>
+                        <div class="form-group">
+                            <label for="current-password">Current Password</label>
+                            <input type="password" id="current-password" name="current-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="new-password">New Password</label>
+                            <input type="password" id="new-password" name="new-password">
+                        </div>
+                        <div class="form-group">
+                            <label for="confirm-new-password">Confirm New Password</label>
+                            <input type="password" id="confirm-new-password" name="confirm-new-password">
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary">Save Changes</button>
+                            <button type="button" class="btn-secondary" id="reset-form">Cancel</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Settings Modal (same as in dashboard) -->
+    <div id="settings-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Game Settings</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="settings-group">
+                    <label for="time-limit">Time Limit (seconds):</label>
+                    <input type="range" id="time-limit" min="30" max="120" step="10" value="60">
+                    <span id="time-value">60</span>
+                </div>
+                <div class="settings-group">
+                    <label for="sound-toggle">Sound Effects:</label>
+                    <label class="switch">
+                        <input type="checkbox" id="sound-toggle" checked>
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+                <div class="settings-group">
+                    <label for="theme-select">Theme:</label>
+                    <select id="theme-select">
+                        <option value="default">Default</option>
+                        <option value="dark">Dark Mode</option>
+                        <option value="neon">Neon</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="save-settings" class="btn-primary">Save Settings</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="authentication.js"></script>
+    <script>
+        // Add this script to ensure profile data displays properly
+        document.addEventListener('DOMContentLoaded', function() {
+            // This would normally be populated from your user data
+            const userData = JSON.parse(localStorage.getItem('userData')) || {};
+            
+            // Display user info in the header
+            if (userData.name) document.getElementById('display-name').textContent = userData.name;
+            if (userData.email) document.getElementById('display-email').textContent = userData.email;
+            
+            // Populate form fields
+            if (userData.name) document.getElementById('profile-name').value = userData.name;
+            if (userData.email) document.getElementById('profile-email').value = userData.email;
+            if (userData.dob) document.getElementById('profile-dob').value = userData.dob;
+            if (userData.phone) document.getElementById('profile-phone').value = userData.phone;
+            if (userData.state) document.getElementById('profile-state').value = userData.state;
+        });
+    </script>
+</body>
+</html>
